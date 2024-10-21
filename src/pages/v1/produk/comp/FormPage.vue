@@ -58,6 +58,7 @@
                 :factory="uploadFiles"
                 :loading="uploadPercent"
                 auto-upload
+                class="full-width"
                 square
                 flat
                 bordered

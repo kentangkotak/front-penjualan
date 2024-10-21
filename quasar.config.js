@@ -84,7 +84,24 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        cordova: {
+          // Quasar handles app exit on mobile phone back button.
+          backButtonExit: true, // false / "*" / ["/login", "/home", "/my-page"],
+
+          // On the other hand, the following completely
+          // disables Quasar's back button management.
+          backButton: false,
+        },
+        capacitor: {
+          // Quasar handles app exit on mobile phone back button.
+          backButtonExit: true, // false / "*" / ["/login", "/home", "/my-page"],
+
+          // On the other hand, the following completely
+          // disables Quasar's back button management.
+          backButton: false,
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
