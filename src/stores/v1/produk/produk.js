@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { api } from "src/boot/axios";
+import { notifErr, notifSuccess } from "src/boot/notify-defaults";
 
 export const useProdukstore = defineStore("master-produk", {
   state: () => ({
@@ -11,7 +12,7 @@ export const useProdukstore = defineStore("master-produk", {
       deskripsi: "",
       harga: "",
       jenis: "",
-      foto: "",
+      photos: [],
     },
   }),
   actions: {
@@ -36,20 +37,25 @@ export const useProdukstore = defineStore("master-produk", {
     async saveData() {
       this.loading = true;
       try {
-        const resp = await api.post("/produk/simpanproduk", this.form);
+        const resp = await api.post("/produk/simpanproduk", this.form, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         if (resp.status === 200) {
-          const storePasien = usePengunjungIgdStore();
-          const isi = resp.data.result;
-          storePasien.injectDataPasien(pasien, isi, "triage");
+          console.log("hasil", resp.status);
           notifSuccess(resp);
-          this.initReset();
-          this.loadingForm = false;
+          //this.initReset();
+          this.loading = false;
         }
-        this.loadingForm = false;
+        this.loading = false;
       } catch (error) {
-        this.loadingForm = false;
+        this.loading = false;
         notifErr(error);
       }
+    },
+    selectFiles(files) {
+      this.form.photos = files;
     },
   },
 });

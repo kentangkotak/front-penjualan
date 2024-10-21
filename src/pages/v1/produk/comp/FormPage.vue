@@ -1,13 +1,12 @@
 <template>
-  <q-form ref="refForm" class="full-height" @submit="onSubmit">
-    <q-dialog v-model="store.fixed">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">Input Menu</div>
-        </q-card-section>
+  <q-dialog v-model="store.fixed">
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">Input Menu</div>
+      </q-card-section>
 
-        <q-separator />
-
+      <q-separator />
+      <q-form ref="refForm" class="full-height" @submit="onSubmit">
         <q-card-section style="max-height: 50vh" class="scroll">
           <div class="row full-width">
             <div class="col-12 q-mb-sm">
@@ -47,23 +46,31 @@
                 outlined
                 dense
                 label="Jenis Menu"
+                transition-show="flip-up"
+                transition-hide="flip-down"
                 :options="jenis"
                 :rules="[(val) => !!val || 'Harap Diisi terlebih dahulu']"
               />
             </div>
-            <!-- <div class="col-12 q-mb-sm">
-              <q-file
-                ref="reffoto"
-                v-model="store.form.foto"
-                outlined
+            <div class="col-12 q-mb-sm">
+              <q-uploader
+                ref="uploader"
+                :factory="uploadFiles"
+                :loading="uploadPercent"
+                auto-upload
+                square
+                flat
+                bordered
                 label="Foto"
-                :rules="[(val) => !!val || 'Harap Diisi terlebih dahulu']"
+                accept="image/*"
+                @finish="finished"
+                @rejected="onRejected"
               >
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" />
                 </template>
-              </q-file>
-            </div> -->
+              </q-uploader>
+            </div>
           </div>
         </q-card-section>
 
@@ -78,21 +85,23 @@
             :loading="store.loading"
           />
         </q-card-actions>
-      </q-card>
-    </q-dialog>
-  </q-form>
+      </q-form>
+    </q-card>
+  </q-dialog>
 </template>
 <script setup>
+import { useQuasar } from "quasar";
 import { useProdukstore } from "src/stores/v1/produk/produk";
 import { ref } from "vue";
 
+const $q = useQuasar();
 const store = useProdukstore();
 const refForm = ref(null);
 const refnama = ref(null);
 const refdeskripsi = ref(null);
 const refharga = ref(null);
 const refjenis = ref(null);
-const reffoto = ref(null);
+const uploader = ref(null);
 const jenis = ["Food", "Drink"];
 
 function onSubmit() {
@@ -100,5 +109,21 @@ function onSubmit() {
   store.saveData().then(() => {
     refForm.value.resetValidation();
   });
+}
+
+function uploadFiles(file) {
+  console.log("sa", file);
+  store.selectFiles(file);
+}
+function uploadPercent(files) {
+  console.log("upload percent", files);
+}
+
+function finished() {
+  console.log("finished");
+}
+
+function onRejected() {
+  console.log("rejected");
 }
 </script>

@@ -10,9 +10,10 @@
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-bold">Mary</q-item-label>
-          <q-bagde color="blue">
-            <q-item-label caption>Selamat Datang</q-item-label>
-          </q-bagde>
+
+          <!-- <q-item-label caption>
+            <q-bagde color="blue">Selamat Datang</q-bagde></q-item-label
+          > -->
         </q-item-section>
       </q-item>
     </q-toolbar>
