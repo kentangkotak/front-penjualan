@@ -18,7 +18,7 @@
         <q-item v-ripple>
           <q-item-section avatar>
             <q-avatar size="100px" clickable>
-              <q-img src="../../../../src/images/food.svg" />
+              <q-img src="http://localhost/penjualan/back-penjualan/public" />
             </q-avatar>
           </q-item-section>
           <q-separator vertical inset color="orange" />
@@ -27,7 +27,7 @@
               <div class="col-10 text-weight-bold">
                 <q-item-section class="q-ml-sm">
                   <q-badge outline color="cyan" class="text-h7">
-                    {{ item?.name }}</q-badge
+                    {{ item?.nama }}</q-badge
                   ></q-item-section
                 >
                 <q-item-section class="col-10">

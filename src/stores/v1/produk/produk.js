@@ -24,9 +24,9 @@ export const useProdukstore = defineStore("master-produk", {
       await api
         .get("/produk/produk")
         .then((resp) => {
-          this.loading = false;
           if (resp.status === 200) {
             this.items = resp?.data;
+            this.loading = false;
           }
         })
         .catch((err) => {
