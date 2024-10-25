@@ -6,7 +6,7 @@ export const useProdukstore = defineStore("master-produk", {
   state: () => ({
     items: [],
     loading: "",
-    fixed: true,
+    fixed: false,
     form: {
       nama: "",
       deskripsi: "",
@@ -43,9 +43,8 @@ export const useProdukstore = defineStore("master-produk", {
           },
         });
         if (resp.status === 200) {
-          console.log("hasil", resp.status);
           notifSuccess(resp);
-          //this.initReset();
+          this.initData();
           this.loading = false;
         }
         this.loading = false;

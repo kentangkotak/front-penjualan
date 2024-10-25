@@ -18,7 +18,7 @@
         <q-item v-ripple>
           <q-item-section avatar>
             <q-avatar size="100px" clickable>
-              <q-img src="http://localhost/penjualan/back-penjualan/public" />
+              <q-img :src="`${pathImg + item?.location}`" />
             </q-avatar>
           </q-item-section>
           <q-separator vertical inset color="orange" />
@@ -26,16 +26,19 @@
             <div class="row">
               <div class="col-10 text-weight-bold">
                 <q-item-section class="q-ml-sm">
-                  <q-badge outline color="cyan" class="text-h7">
+                  <q-badge color="cyan" class="text-h7">
                     {{ item?.nama }}</q-badge
                   ></q-item-section
                 >
                 <q-item-section class="col-10">
-                  Alamat : {{ item?.alamat }}</q-item-section
+                  Deskripsi :
+                  <q-item-label caption class="text-italic text-bold">
+                    {{ item?.deskripsi }}
+                  </q-item-label></q-item-section
                 >
                 <q-item-section class="q-ml-sm">
-                  <q-badge color="red" class="text-h7"
-                    >No. Telepone : {{ item?.nohp }}</q-badge
+                  <q-badge outline color="red" class="text-h7 text-bold"
+                    >Harga : {{ formatRpDouble(item?.harga) }}</q-badge
                   ></q-item-section
                 >
                 <!-- <q-item-section side top>
@@ -54,6 +57,8 @@ import JudulPage from "./comp/JudulPage.vue";
 import LoadingPage from "./comp/LoadingPage.vue";
 import EmptyData from "./comp/EmptyData.vue";
 import { useProdukstore } from "src/stores/v1/produk/produk";
+import { pathImg } from "src/boot/axios";
+import { formatRpDouble } from "src/modules/formatter";
 
 const store = useProdukstore();
 

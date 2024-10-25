@@ -1,7 +1,9 @@
 <template>
   <div class="row">
     <div class="col-6">
-      <q-toolbar-title class="text-left q-ml-sm">Data Menu </q-toolbar-title>
+      <q-toolbar-title class="text-left q-ml-sm text-italic"
+        >Data Menu
+      </q-toolbar-title>
     </div>
     <div class="col-6">
       <q-toolbar-title class="text-right">
